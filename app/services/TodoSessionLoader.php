@@ -17,5 +17,21 @@ class TodoSessionLoader implements ITodoItemLoader {
 	public function add(TodoItem $item): void {
 		USession::addOrRemoveValueFromArray ( self::SESSION_KEY, $item, true );
 	}
+	public function clear(): void {
+		USession::delete ( self::SESSION_KEY );
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

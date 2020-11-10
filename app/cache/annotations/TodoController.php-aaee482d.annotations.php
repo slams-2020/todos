@@ -31,5 +31,8 @@ return array(
   'controllers\\TodoController::submit' => array(
     array('#name' => 'post', '#type' => 'Ubiquity\\annotations\\router\\PostAnnotation', "add")
   ),
+  'controllers\\TodoController::clear' => array(
+    array('#name' => 'get', '#type' => 'Ubiquity\\annotations\\router\\GetAnnotation', "clear")
+  ),
 );
 

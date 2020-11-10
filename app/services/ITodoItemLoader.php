@@ -33,5 +33,10 @@ interface ITodoItemLoader {
 	 * @param TodoItem $item
 	 */
 	public function add(TodoItem $item): void;
+
+	/**
+	 * Supprime tous les items
+	 */
+	public function clear(): void;
 }
 

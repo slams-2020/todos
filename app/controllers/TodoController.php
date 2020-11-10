@@ -48,7 +48,7 @@ class TodoController extends ControllerBase {
 	 * @get("add")
 	 */
 	public function add() {
-		$this->jquery->postFormOnClick ( '#btValidate', '/add', 'frmItem', '#response', [ 
+		$this->jquery->postFormOnClick ( '#btValidate', '/add', 'frmItem', 'body', [ 
 				'hasLoader' => 'internal'
 		] );
 		if (URequest::isAjax ()) {
@@ -66,8 +66,8 @@ class TodoController extends ControllerBase {
 		$item = new TodoItem ();
 		$item->setCaption ( URequest::post ( 'caption', 'no caption' ) );
 		$this->loader->add ( $item );
-		echo $this->jquery->semantic ()->htmlMessage ( '', 'Item ajouté' );
-		$this->displayItems ();
+		$msg = $this->jquery->semantic ()->htmlMessage ( '', 'Item ajouté' );
+		$this->_index ( $msg );
 	}
 	private function _index($response = '') {
 		$this->jquery->getHref ( 'a', '', [ 
@@ -79,10 +79,18 @@ class TodoController extends ControllerBase {
 				'response' => $response
 		] );
 	}
+
+	/**
+	 *
+	 * @get("clear")
+	 */
+	public function clear() {
+		$this->loader->clear ();
+		$msg = $this->jquery->semantic ()->htmlMessage ( 'clearMsg', 'Liste d\'items vidée', 'info' );
+		$msg->addIcon ( 'info' );
+		$this->_index ( $msg );
+	}
 }
-
-
-
 
 
 
