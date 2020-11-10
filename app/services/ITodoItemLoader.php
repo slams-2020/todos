@@ -15,10 +15,10 @@ interface ITodoItemLoader {
 	/**
 	 * Supprime un todo-item par son id
 	 *
-	 * @param int $id
+	 * @param string $id
 	 * @return bool
 	 */
-	public function remove(int $id): bool;
+	public function remove(string $id): bool;
 
 	/**
 	 *

@@ -32,7 +32,35 @@ class TodoController extends ControllerBase {
 		$dt->setFields ( [ 
 				'caption'
 		] );
-		$dt->addDeleteButton ();
+
+		// Exemple de personnalisation d'aff de colonne avec ajout d'attribut html
+		/*
+		 * $dt->
+		 * $dt->setValueFunction ( 'caption', function ($va, $instance) {
+		 * $lbl = new HtmlLabel ( '', $va );
+		 * $lbl->addIcon ( 'user' );
+		 * $lbl->setProperty ( 'data-truc', $instance->getCaption () );
+		 * return $lbl;
+		 * } );
+		 */
+		$dt->setIdentifierFunction ( 'getId' );
+		$bt = $dt->addDeleteButton ( false );
+		$dt->setEdition ();
+		$this->jquery->getOnClick ( '._delete', 'delete', 'body', [ 
+				'hasLoader' => 'internal',
+				'attr' => 'data-ajax'
+		] );
+	}
+
+	/**
+	 *
+	 * @param string $id
+	 * @get('delete/{id}')
+	 */
+	public function delete(string $id) {
+		$this->loader->remove ( $id );
+		$msg = $this->jquery->semantic ()->htmlMessage ( '', 'Item supprimé' );
+		$this->_index ( $msg );
 	}
 
 	/**

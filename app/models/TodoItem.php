@@ -3,7 +3,7 @@
 namespace models;
 
 class TodoItem {
-	private $id = 0;
+	private $id;
 	private $caption;
 	/**
 	 *
