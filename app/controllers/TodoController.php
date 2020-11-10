@@ -40,11 +40,7 @@ class TodoController extends ControllerBase {
 	 * @route('_default')
 	 */
 	public function index() {
-		$this->jquery->getHref ( 'a', '', [ 
-				'hasLoader' => 'internal'
-		] );
-		$this->displayItems ();
-		$this->jquery->renderDefaultView ();
+		$this->_index ();
 	}
 
 	/**
@@ -55,7 +51,11 @@ class TodoController extends ControllerBase {
 		$this->jquery->postFormOnClick ( '#btValidate', '/add', 'frmItem', '#response', [ 
 				'hasLoader' => 'internal'
 		] );
-		$this->jquery->renderView ( 'TodoController/add.html' );
+		if (URequest::isAjax ()) {
+			$this->jquery->renderView ( 'TodoController/add.html' );
+		} else {
+			$this->_index ( $this->jquery->renderView ( 'TodoController/add.html', [ ], true ) );
+		}
 	}
 
 	/**
@@ -68,6 +68,16 @@ class TodoController extends ControllerBase {
 		$this->loader->add ( $item );
 		echo $this->jquery->semantic ()->htmlMessage ( '', 'Item ajouté' );
 		$this->displayItems ();
+	}
+	private function _index($response = '') {
+		$this->jquery->getHref ( 'a', '', [ 
+				'hasLoader' => 'internal'
+		] );
+		$this->displayItems ();
+
+		$this->jquery->renderView ( 'TodoController/index.html', [ 
+				'response' => $response
+		] );
 	}
 }
 
