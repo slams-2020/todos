@@ -31,6 +31,14 @@ class TodoSessionLoader implements ITodoItemLoader {
 	public function clear(): void {
 		USession::delete ( self::SESSION_KEY );
 	}
+	/**
+	 *
+	 * {@inheritdoc}
+	 * @see \services\ITodoItemLoader::get()
+	 */
+	public function get($id): ?TodoItem {
+		return (USession::getArray ( self::SESSION_KEY ) [$id]) ?? null;
+	}
 }
 
 

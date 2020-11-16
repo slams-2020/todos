@@ -2,7 +2,14 @@
 
 namespace models;
 
+/**
+ */
 class TodoItem {
+	/**
+	 *
+	 * @id
+	 * @column("name"=>"id","dbType"=>"int(11)")
+	 */
 	private $id;
 	private $caption;
 	/**

@@ -3,9 +3,12 @@
 return array(
   '#namespace' => 'controllers',
   '#uses' => array (
+  'HtmlMessage' => 'Ajax\\semantic\\html\\collections\\HtmlMessage',
+  'Router' => 'Ubiquity\\controllers\\Router',
+  'DAO' => 'Ubiquity\\orm\\DAO',
   'URequest' => 'Ubiquity\\utils\\http\\URequest',
   'TodoItem' => 'models\\TodoItem',
-  'TodoSessionLoader' => 'services\\TodoSessionLoader',
+  'TodoDAOLoader' => 'services\\TodoDAOLoader',
 ),
   '#traitMethodOverrides' => array (
   'controllers\\TodoController' => 
@@ -17,7 +20,7 @@ return array(
   ),
   'controllers\\TodoController::$loader' => array(
     array('#name' => 'autowired', '#type' => 'Ubiquity\\annotations\\di\\AutowiredAnnotation'),
-    array('#name' => 'var', '#type' => 'mindplay\\annotations\\standard\\VarAnnotation', 'type' => 'TodoSessionLoader')
+    array('#name' => 'var', '#type' => 'mindplay\\annotations\\standard\\VarAnnotation', 'type' => 'TodoDAOLoader')
   ),
   'controllers\\TodoController::setLoader' => array(
     array('#name' => 'param', '#type' => 'mindplay\\annotations\\standard\\ParamAnnotation', 'type' => '\\services\\TodoSessionLoader', 'name' => 'loader')
@@ -37,6 +40,13 @@ return array(
   ),
   'controllers\\TodoController::clear' => array(
     array('#name' => 'get', '#type' => 'Ubiquity\\annotations\\router\\GetAnnotation', "clear")
+  ),
+  'controllers\\TodoController::testDb' => array(
+    array('#name' => 'route', '#type' => 'Ubiquity\\annotations\\router\\RouteAnnotation', "test/db")
+  ),
+  'controllers\\TodoController::update' => array(
+    array('#name' => 'get', '#type' => 'Ubiquity\\annotations\\router\\GetAnnotation', "update/{id}","name"=>"todo.update"),
+    array('#name' => 'param', '#type' => 'mindplay\\annotations\\standard\\ParamAnnotation', 'type' => 'string', 'name' => 'id')
   ),
 );
 

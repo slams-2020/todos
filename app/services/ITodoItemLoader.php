@@ -38,5 +38,21 @@ interface ITodoItemLoader {
 	 * Supprime tous les items
 	 */
 	public function clear(): void;
+
+	/**
+	 *
+	 * @param mixed $id
+	 * @return ?TodoItem
+	 */
+	public function get($id): ?TodoItem;
 }
+
+
+
+
+
+
+
+
+
 

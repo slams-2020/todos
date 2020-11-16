@@ -9,6 +9,10 @@ return array(
   array (
   ),
 ),
+  'models\\TodoItem::$id' => array(
+    array('#name' => 'id', '#type' => 'Ubiquity\\annotations\\IdAnnotation'),
+    array('#name' => 'column', '#type' => 'Ubiquity\\annotations\\ColumnAnnotation', "name"=>"id","dbType"=>"int(11)")
+  ),
   'models\\TodoItem::getId' => array(
     array('#name' => 'return', '#type' => 'mindplay\\annotations\\standard\\ReturnAnnotation', 'type' => 'mixed')
   ),
